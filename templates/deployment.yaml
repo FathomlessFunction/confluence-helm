@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-confluence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: confluence
+  template:
+    metadata:
+      labels:
+        app: confluence
+    spec:
+      containers:
+        - name: confluence
+          image: "{{ .Values.confluence.image.repository }}:{{ .Values.confluence.image.tag }}"
+          imagePullPolicy: {{ .Values.confluence.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8090
+          volumeMounts:
+            - name: confluence-data
+              mountPath: /var/atlassian/application-data/confluence
+      volumes:
+        - name: confluence-data
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-confluence-volume

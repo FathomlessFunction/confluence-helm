@@ -1,0 +1,17 @@
+
+confluence:
+  image:
+    repository: atlassian/confluence
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 2Gi
+
+    # set this to 'Retain' if you would like to retain state after spinning the cluster down
+    # and 'Delete' if you do not want to keep state
+    volumeRetainPolicy: Retain
+
+  resources: {}
