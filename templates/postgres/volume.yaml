@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-confluence-volume
+  name: {{ .Release.Name }}-postgres-pvc
   annotations:
     # only 'keep' this resource if retain policy is set to 'Retain'
     {{- if eq .Values.volumeRetainPolicy "Retain" }}
@@ -11,7 +11,7 @@ spec:
   # storageClassName: postgres-storage-class
   persistentVolumeReclaimPolicy: {{ .Values.volumeRetainPolicy }}  
   accessModes:
-    - {{ .Values.confluence.persistence.accessMode }}
+    - {{ .Values.postgres.persistence.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.confluence.persistence.size }}
+      storage: {{ .Values.postgres.persistence.size }}

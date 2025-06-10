@@ -1,3 +1,6 @@
+# set this to 'Retain' if you would like to retain state after spinning the cluster down
+# and 'Delete' if you do not want to keep state
+volumeRetainPolicy: Retain
 
 confluence:
   image:
@@ -9,10 +12,6 @@ confluence:
     enabled: true
     accessMode: ReadWriteOnce
     size: 2Gi
-
-    # set this to 'Retain' if you would like to retain state after spinning the cluster down
-    # and 'Delete' if you do not want to keep state
-    volumeRetainPolicy: Retain
 
   resources: {}
 
@@ -29,3 +28,7 @@ postgres:
     username: admin
     password: localpassword
     database: confluencedb
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 2Gi

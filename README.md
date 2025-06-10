@@ -1,12 +1,17 @@
-Things to do:
-- work out _helpers.tpl
-- add deployment for confluence container
-- add cassandra database
-- test out connecting the confluence container with the DB!
-- add a little guide !
+### Installation Instructions
+The below steps will walk you through how to use this helmchart to install a local confluence instance!
 
-Things to remember to do:
-- force git add a .keep file in confluence-home
+```mermaid
+graph TD
+    Confluence["Confluence Pod"]
+    Postgres[("PostgreSQL Pod")]
+    PVC["PersistentVolumeClaim"]
+    PV[("PersistentVolume")]
+
+    Confluence --> Postgres
+    Confluence --> PVC
+    PVC --> PV
+```
 
 Steps to run:
 1. 
@@ -55,3 +60,13 @@ If you are making helm chart changes, test them first with
 ```
 helm template . -f values.yaml
 ```
+
+### How to renew your Confluence license
+
+1. You may find your confluence's Server ID by navigating to [http://localhost:8090/admin/license.action](http://localhost:8090/admin/license.action). You will need to log in using the admin credentials you configured when you first set your Confluence instance up.
+2. You may request a new trial license by navigating [here](https://www.atlassian.com/purchase/my/license-evaluation), and selecting Confluence > Data Centre. Fill out the required fields, along with your Server ID, to request your new trial license.
+3. Paste your license into the [license.action](http://localhost:8090/admin/license.action) page you have open for your local Confluence instance, click save, and you are done!
+
+### DevNotes
+Things to do:
+- work out _helpers.tpl
