@@ -15,3 +15,17 @@ confluence:
     volumeRetainPolicy: Retain
 
   resources: {}
+
+postgres:
+  replicaCount: 1
+  image:
+    repository: postgres
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5432
+  auth:
+    username: admin
+    password: localpassword
+    database: confluencedb
